@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ajax</title>
+</head>
+<body>
+<table border="1px solid block">
+	<tr>
+		<td>ID</td>
+		<td>name</td>
+		<td>number</td>
+		<td>操作</td>
+	</tr>
+	{volist name="data" id="vo"}
+	<tr>
+		<td>{$vo.id}</td>
+		<td>{$vo.name}</td>
+		<td>{$vo.number}</td>
+		<input type="hidden" value="{$vo.id}" id="hid">
+		<td><input type="button" value="增加" onclick="add({$vo.id})"><input type="button" value="减少" onclick="edd({$vo.id})"></td>
+	</tr>
+	{/volist}
+</table>
+</body>
+<script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
+<script>
+	function add(id){
+		var url = '{:url("Index/add")}';
+		data = {
+			'id' : id,
+		}
+		$.post(url,data,function(res){
+			if (res.code==1) {
+				location.href = res.data;
+			}
+		})
+	}
+	function edd(id){
+		var url = '{:url("Index/edd")}';
+		data = {
+			'id' : id,
+		}
+		$.post(url,data,function(res){
+			if (res.code == 1) {
+				location.href = res.data;
+			}
+		})
+	}
+</script>
+</html>
